@@ -17,19 +17,19 @@
   <!-- Compiled and minified JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
+  <link href='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.css' rel='stylesheet' />
+  <link href='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.css' rel='stylesheet' />
 
 
-  <link href="js/packages/core/main.css" rel="stylesheet">
-  <link href="js/packages/daygrid/main.css" rel="stylesheet">
-  <link href="js/packages/timegrid/main.css" rel="stylesheet">
+  <script src='https://unpkg.com/@fullcalendar/core@4.4.2/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/daygrid@4.4.2/main.min.js'></script>
+  <script src='https://unpkg.com/@fullcalendar/timegrid@4.4.2/main.min.js'></script>
 
-  <script src="js/packages/core/main.js"></script>
-  <script src="js/packages/daygrid/main.js"></script>
-  <script src="js/packages/timegrid/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.27.0/moment.min.js"></script>
 
-  <!--Moment.js import-->
-  <script src="js/packages/moment/main.min.js"></script>
-  <script src="js/packages/moment-timezone/main.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+
 </head>
 
 <body class="container ">
@@ -50,27 +50,18 @@
       <button onclick="setLocalStorage()" class="modal-close waves-effect waves-green btn-flat">Submit</button>
     </div>
   </div>
-
-
-
-
-
   <div id="warningMessage"></div>
-
-
-  <br>
-  <br>
-
-
   <div class="container">
     <div class="row">
 
-      <div class="col-12">
+      <div class="col-12">  
+        <h3 class="center-align">GIBM Calendar</h3>
+        <br>
         <div id='calendar'></div>
       </div>
 
     </div>
-    <button data-target="modal1" class="btn modal-trigger">Modal</button>
+    
 
     <script src="js/inputInfo.js"></script>
     <script src="js/calendar.js"></script>

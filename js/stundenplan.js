@@ -38,7 +38,6 @@ function getClass(job_id) {
                 var option = '<option value="' + d.klasse_id + '">' + d.klasse_longname + '</option>';
                 $('#classes').append(option);
             }
-
         })
         .fail(function () {
             $('warningMessage').html('No Connection to Server :(')
