@@ -1,27 +1,26 @@
 const scheduleUrl = 'https://sandbox.gibm.ch/tafel.php';
-
-document.addEventListener('DOMContentLoaded', function () {
-
-
+var calendarEl = document.getElementById('calendar');
+var events = [];
+var calendar = new FullCalendar.Calendar(calendarEl, {
+    plugins: ['dayGrid',],
+    defaultView: 'dayGridWeek',
+    weekends: false,
+    minTime: '07:00:00',
+    maxTime: '18:30:00',
+    handleWindowResize: true,
+});
+document.addEventListener('DOMContentLoaded', function something() {
     //get localstorage
     const info = getLocalStorage().split(';');
+    initiliazeCalendar(); 
+});
 
-    var calendarEl = document.getElementById('calendar');
-    var events = [];
+function initiliazeCalendar() {
+    events = [];
     updateEvents();
-
-
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        plugins: ['dayGrid',],
-        defaultView: 'dayGridWeek',
-        weekends: false,
-        events: events
-    });
-    
     function updateEvents() {
         $.getJSON(scheduleUrl, { klasse_id: localStorage.getItem('class') }, function (data) {
             for (var table of data) {
-               
                 var event = {
                     title: table.tafel_longfach,
                     start: table.tafel_datum + 'T' + table.tafel_von,
@@ -39,15 +38,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 events.push(event);
             }
         }).done(function () {
-            //alert when there are no events this week
+            calendar.getEvents().forEach(event => event.remove());
+            events.forEach(event => calendar.addEvent(event));
         });
     }
-    
-    calendar.addEventSource(events);
-    console.log(calendar.getEventSources());
+
     calendar.refetchEvents()
     calendar.rerenderEvents()
     calendar.render();
-});
+    console.log(calendar.getEventSources());
+}
+
+
+
 
 

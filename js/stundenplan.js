@@ -63,5 +63,7 @@ function setLocalStorage() {
     info = getLocalStorage().split(';');
     console.log("new_jobid = " + info[0]);
     console.log("new_classid = " + info[1]);
-}
 
+    initiliazeCalendar();
+
+}
