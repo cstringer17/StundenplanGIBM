@@ -5,12 +5,13 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     plugins: ['timeGrid'],
     defaultView: 'timeGridWeek',
     weekends: false,
-    minTime: '07:00:00',
-    maxTime: '18:30:00',
+    minTime: '05:00:00',
+    maxTime: '19:00:00',
     footer: false,
+    nowIndicator: true,
     allDaySlot: false,
     header: {
-        left: 'prevDate,nextDate,today',
+        left: 'prevDate,nextDate,todayB',
         center: 'title',
         right: 'openModal,timeGridWeek,timeGridDay'
     },
@@ -25,52 +26,70 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             text: 'next',
             click: function () {
                 calendar.next()
-                initiliazeCalendar();
+                initializeCalendar();
+            }
+        },
+        todayB: {
+            text: 'today',
+            click: function () {
+                calendar.today()
+                initializeCalendar();
             }
         },
         prevDate: {
             text: 'prev',
             click: function () {
                 calendar.prev()
-                initiliazeCalendar();
+                initializeCalendar();
             }
         }
     },
+    eventRender: function (info) {
+        $(info.el).addClass("progress-bar-fc");
+        $(info.el).addClass("progress-bar-striped");
+    }
 });
 document.addEventListener('DOMContentLoaded', function something() {
     //get localstorage
     const info = getLocalStorage().split(';');
-    initiliazeCalendar();
+    initializeCalendar();
 });
 
-function initiliazeCalendar() {
+function initializeCalendar() {
     events = [];
-    updateEvents();
+
+
     var now = moment(calendar.getDate())
     var week = now.format('ww-yyyy');
-    console.log(week);
-    function updateEvents() {
-        $.getJSON(scheduleUrl, { klasse_id: localStorage.getItem('class'), woche: week }, function (data) {
-            for (var table of data) {
-                var event = {
-                    title: table.tafel_longfach,
-                    start: table.tafel_datum + 'T' + table.tafel_von,
-                    end: table.tafel_datum + 'T' + table.tafel_bis,
-                    prof: table.tafel_lehrer,
-                    room: table.tafel_raum,
-                    comment: table.tafel_kommentar,
-                    allDay: false
-                };
-                console.log(JSON.stringify(events,null,"   "));
-                events.push(event);
-            }
-        }).done(function () {
-            calendar.getEvents().forEach(event => event.remove());
-            events.forEach(event => calendar.addEvent(event));
-        });
-    }
-    calendar.refetchEvents()
-    calendar.rerenderEvents()
+    console.log("Current Week", week);
+    const url = `${scheduleUrl}?klasse_id=${localStorage.getItem('class')}&woche=${week}`;
+    $.getJSON(url, function (data) {
+        for (var table of data) {
+            var event = {
+                title: table.tafel_longfach,
+                start: table.tafel_datum + 'T' + table.tafel_von,
+                end: table.tafel_datum + 'T' + table.tafel_bis,
+                prof: table.tafel_lehrer,
+                room: table.tafel_raum,
+                comment: table.tafel_kommentar,
+                allDay: false
+            };
+            events.push(event);
+        }
+    }).done(function () {
+
+        calendar.getEvents().forEach(event => event.remove());
+        events.forEach(event => calendar.addEvent(event));
+        
+        M.Toast.dismissAll()
+
+        if (events.length == 0) {
+            M.toast({ html: 'Sit back and relax, no school this week :)' })
+        }
+    });
+
+
+
     calendar.render();
 }
 

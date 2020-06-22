@@ -4,3 +4,29 @@
 body{
     font-family: 'Raleway', sans-serif;
 }
+.progress-bar-fc {
+    -webkit-animation: progress-bar-stripes 2s linear infinite;
+    -o-animation: progress-bar-stripes 2s linear infinite;
+    animation: progress-bar-stripes 2s linear infinite;
+}
+#toast-container {
+    top: auto !important;
+    right: auto !important;
+    bottom: 50%;
+    left:40%;  
+  }
+  #gt{
+    text-decoration: none;
+    
+  }
+  .heart {
+    color: #e25555;
+  }
+  footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #f2f2f2;
+  text-align: center;
+  }
