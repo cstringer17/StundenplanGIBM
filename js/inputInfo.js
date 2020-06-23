@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#classes').hide();
 
   $('#modal1').modal();
-  $('#modal1').modal('open');
 
+  console.log(getLocalStorage());
+ 
+  if (localStorage.getItem("class") === null && localStorage.getItem("job") === null) {
+    $('#modal1').modal('open');
+  }
   $('#jobs').on('change', function () {
 
     console.log("Somethings changed...");

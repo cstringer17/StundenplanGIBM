@@ -44,10 +44,14 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             }
         }
     },
-    eventRender: function (info) {
-        $(info.el).addClass("progress-bar-fc");
-        $(info.el).addClass("progress-bar-striped");
-    }
+    eventRender: function(info) {
+        tippy(info.el, {
+            allowHTML: true,
+            content: info.event.title +"<br>"+ 
+                    info.event.prof,
+          });
+      }
+    
 });
 document.addEventListener('DOMContentLoaded', function something() {
     //get localstorage
@@ -57,7 +61,6 @@ document.addEventListener('DOMContentLoaded', function something() {
 
 function initializeCalendar() {
     events = [];
-
 
     var now = moment(calendar.getDate())
     var week = now.format('ww-yyyy');
@@ -89,7 +92,8 @@ function initializeCalendar() {
     });
 
 
-
+    calendar.rerenderEvents();
+    calendar.refetchEvents();
     calendar.render();
 }
 
