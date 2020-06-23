@@ -10,6 +10,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     footer: false,
     nowIndicator: true,
     allDaySlot: false,
+    handleWindowResize: true,
     header: {
         left: 'prevDate,nextDate,todayB',
         center: 'title',
@@ -27,6 +28,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             click: function () {
                 calendar.next()
                 initializeCalendar();
+                
             }
         },
         todayB: {
@@ -34,6 +36,7 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             click: function () {
                 calendar.today()
                 initializeCalendar();
+                noSchoolAnimation();
             }
         },
         prevDate: {
@@ -41,28 +44,36 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
             click: function () {
                 calendar.prev()
                 initializeCalendar();
+               
             }
         }
     },
-    eventRender: function(info) {
+    eventRender: function (info) {
         tippy(info.el, {
             allowHTML: true,
-            content: info.event.title +"<br>"+ 
-                    info.event.prof,
-          });
-      }
-    
+            content: info.event.title + "<br>",
+
+        });
+        console.log(info.event.prof);
+    }
+
 });
 document.addEventListener('DOMContentLoaded', function something() {
     //get localstorage
     const info = getLocalStorage().split(';');
     initializeCalendar();
+    if ($(window).width() < 768) {
+        calendar.changeView('timeGridDay');
+        calendar.setOption('contentHeight', 650);
+        calendar.setOption('aspectRatio', 1.2);
+    }
+
 });
 
 function initializeCalendar() {
     events = [];
 
-    var now = moment(calendar.getDate())
+    var now = moment(calendar.getDate());
     var week = now.format('ww-yyyy');
     console.log("Current Week", week);
     const url = `${scheduleUrl}?klasse_id=${localStorage.getItem('class')}&woche=${week}`;
@@ -83,11 +94,14 @@ function initializeCalendar() {
 
         calendar.getEvents().forEach(event => event.remove());
         events.forEach(event => calendar.addEvent(event));
-        
+
         M.Toast.dismissAll()
 
         if (events.length == 0) {
             M.toast({ html: 'Sit back and relax, no school this week :)' })
+            noSchoolAnimation();
+        }else{
+        schoolAnimation();
         }
     });
 
@@ -105,5 +119,34 @@ function openModal() {
 
 
 
+function noSchoolAnimation() {
+    var elements = document.querySelectorAll('#calendar');
+    anime({
+        targets: elements,
+        keyframes: [
+            { translateX: -10 },
+            { translateX: +10 },
+            { translateX: -10 },
+            { translateX: +10 },
+            { translateX: 0 }
+        ],
+        duration: 500,
+        easing: 'easeInOutQuad'
+    });
 
+}
 
+function schoolAnimation() {
+    var elements = document.querySelectorAll('#calendar');
+    anime({
+        targets: elements,
+        keyframes: [
+            { translateY: -5 },
+            { translateY: +5 },
+            { translateX: 0 }
+        ],
+        duration: 500,
+        easing: 'easeInOutQuad'
+    });
+
+}
