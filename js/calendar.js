@@ -11,6 +11,8 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     nowIndicator: true,
     allDaySlot: false,
     handleWindowResize: true,
+    eventBackgroundColor:"#a98cab",
+    eventBorderColor:"#a98cab",
     header: {
         left: 'prevDate,nextDate,todayB',
         center: 'title',
@@ -143,7 +145,7 @@ function schoolAnimation() {
         keyframes: [
             { translateY: -5 },
             { translateY: +5 },
-            { translateX: 0 }
+            { translateY: 0 }
         ],
         duration: 500,
         easing: 'easeInOutQuad'

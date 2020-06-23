@@ -3,6 +3,8 @@
 }
 body{
     font-family: 'Raleway', sans-serif;
+    background-color: #736470;
+    color:white !important;
 }
 .progress-bar-fc {
     -webkit-animation: progress-bar-stripes 2s linear infinite;
@@ -27,6 +29,18 @@ body{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #f2f2f2;
+  background-color: #69506b;
   text-align: center;
   }
+  .fc-button{
+    background-color: #a98cab !important;
+    background-image: none;
+    border-color:#a98cab !important;
+}
+#calendar
+{
+background-color: #736470;
+}
+.fc-today{
+  background-color: #ada5ac !important;
+}
