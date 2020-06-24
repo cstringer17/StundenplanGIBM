@@ -1,6 +1,5 @@
 
 $(function () {
-
     const jobUrl = 'https://sandbox.gibm.ch/berufe.php';
     const classUrl = 'https://sandbox.gibm.ch/klassen.php';
 
@@ -17,7 +16,7 @@ $(function () {
             })
         })
         .fail(function () {
-            $('warningMessage').html('No Connection to Server :(')
+            M.toast({ html: 'GIBM Servers seem to be having troubles :(' })
         }
 
         );
@@ -40,7 +39,7 @@ function getClass(job_id) {
             }
         })
         .fail(function () {
-            $('warningMessage').html('No Connection to Server :(')
+            M.toast({ html: 'GIBM Servers seem to be having troubles :(' })
         }
 
         );

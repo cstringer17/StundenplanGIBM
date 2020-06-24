@@ -11,8 +11,9 @@ var calendar = new FullCalendar.Calendar(calendarEl, {
     nowIndicator: true,
     allDaySlot: false,
     handleWindowResize: true,
-    eventBackgroundColor:"#a98cab",
-    eventBorderColor:"#a98cab",
+    eventBackgroundColor:"#CE796B",
+    eventBorderColor:"#CE796B",
+    eventTextColor:"#495867",
     header: {
         left: 'prevDate,nextDate,todayB',
         center: 'title',
@@ -105,6 +106,8 @@ function initializeCalendar() {
         }else{
         schoolAnimation();
         }
+    }).fail(function () {
+        M.toast({ html: 'GIBM Servers seem to be having troubles :(' })
     });
 
 
@@ -117,8 +120,6 @@ function openModal() {
     $('#modal1').modal('open');
     console.log("opening modal");
 }
-
-
 
 
 function noSchoolAnimation() {

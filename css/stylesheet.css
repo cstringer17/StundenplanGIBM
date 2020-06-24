@@ -3,8 +3,8 @@
 }
 body{
     font-family: 'Raleway', sans-serif;
-    background-color: #736470;
-    color:white !important;
+    
+    color:#495867 !important;
 }
 .progress-bar-fc {
     -webkit-animation: progress-bar-stripes 2s linear infinite;
@@ -29,18 +29,61 @@ body{
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: #69506b;
+  background-color: #C18C5D;
   text-align: center;
+  color: white !important;
   }
   .fc-button{
-    background-color: #a98cab !important;
+    background-color: #CE796B !important;
     background-image: none;
-    border-color:#a98cab !important;
+    border-color:#CE796B !important;
+    
 }
 #calendar
 {
-background-color: #736470;
+
 }
 .fc-today{
-  background-color: #ada5ac !important;
+  background-color: #E7AD99 !important;
+}
+#header{
+  border-bottom: #495867;
+  border-style: none none solid none;
+  border-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+ 
+
+::-webkit-scrollbar-thumb {
+  background: #C18C5D; 
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9c7552; 
+}
+.fc-body{
+  border-color: rgba(73, 88, 103, 0.5) !important;
+}
+.fc-row{
+  border-color: rgba(73, 88, 103, 0.5) !important;
+}
+tr{
+  border-color: rgba(73, 88, 103, 0.5) !important;
+}
+td{
+  border-color: rgba(73, 88, 103, 0.5) !important;
+}
+th{
+  border-color: rgba(73, 88, 103, 0.5) !important;
 }
